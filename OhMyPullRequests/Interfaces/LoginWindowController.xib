@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="LoginWindowController" customModule="OhMyPullRequests" customModuleProvider="target">
+            <connections>
+                <outlet property="additionalLinksTextView" destination="qvb-83-v5r" id="LMO-PT-mLC"/>
+                <outlet property="okButton" destination="Ny0-6m-4CB" id="fW8-NU-nVh"/>
+                <outlet property="repoTextField" destination="4Be-Pm-KIw" id="DKY-Fa-cq5"/>
+                <outlet property="tokenTextField" destination="dE6-ME-YVx" id="Xok-jh-tID"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="376" height="207"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="383" height="263"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ny0-6m-4CB">
+                        <rect key="frame" x="317" y="13" width="53" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aEK-Hk-1Jm">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="OKButtonClick:" target="-2" id="ha0-RM-vEY"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2X-Ki-Qeu">
+                        <rect key="frame" x="243" y="13" width="76" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MhT-Pi-rOr">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelButtonClick:" target="-2" id="26r-Kx-4f4"/>
+                        </connections>
+                    </button>
+                    <gridView verticalHuggingPriority="249" xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-TI-rY2">
+                        <rect key="frame" x="20" y="60" width="343" height="183"/>
+                        <rows>
+                            <gridRow height="26" id="LrL-Sx-MFI"/>
+                            <gridRow yPlacement="top" height="27" id="Zk7-oP-g2R"/>
+                            <gridRow yPlacement="top" height="26" id="6iz-Z5-eWb"/>
+                            <gridRow id="xBC-T9-ij1"/>
+                        </rows>
+                        <columns>
+                            <gridColumn xPlacement="trailing" width="131" id="a3s-xt-HT5"/>
+                            <gridColumn id="DYn-NI-PVU"/>
+                        </columns>
+                        <gridCells>
+                            <gridCell row="LrL-Sx-MFI" column="a3s-xt-HT5" id="LEv-QO-tqD">
+                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JY9-BG-LyH">
+                                    <rect key="frame" x="33" y="162" width="100" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Personal Token:" id="meZ-RA-cJV">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="LrL-Sx-MFI" column="DYn-NI-PVU" id="L9b-f3-d2h">
+                                <secureTextField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dE6-ME-YVx">
+                                    <rect key="frame" x="137" y="160" width="200" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="aXn-D6-oB3"/>
+                                    </constraints>
+                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="VCC-1w-CPL">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <allowedInputSourceLocales>
+                                            <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                        </allowedInputSourceLocales>
+                                    </secureTextFieldCell>
+                                </secureTextField>
+                            </gridCell>
+                            <gridCell row="Zk7-oP-g2R" column="a3s-xt-HT5" id="pUo-c9-4w7"/>
+                            <gridCell row="Zk7-oP-g2R" column="DYn-NI-PVU" id="m9s-Ky-0Nf">
+                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FrA-YC-wFh">
+                                    <rect key="frame" x="135" y="138" width="116" height="13"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Requires &quot;repo&quot; scope." id="n6l-dn-rvz">
+                                        <font key="font" metaFont="system" size="10"/>
+                                        <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="6iz-Z5-eWb" column="a3s-xt-HT5" id="OHI-nD-XjJ">
+                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q41-yq-AoZ">
+                                    <rect key="frame" x="50" y="102" width="83" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Repositories:" id="Uyn-cI-hXQ">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="6iz-Z5-eWb" column="DYn-NI-PVU" id="bfW-t4-yLj">
+                                <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Be-Pm-KIw">
+                                    <rect key="frame" x="137" y="97" width="200" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="7xT-K4-UVV"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="quilljs/quill,facebook/react" drawsBackground="YES" id="HbD-37-Z8l">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="xBC-T9-ij1" column="a3s-xt-HT5" yPlacement="top" id="f0W-kf-5PE">
+                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QVU-NC-edb">
+                                    <rect key="frame" x="29" y="70" width="104" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Additional Links:" id="UUz-hk-SjU">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="xBC-T9-ij1" column="DYn-NI-PVU" id="4AB-h3-7IC">
+                                <scrollView key="contentView" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fuo-gA-sbm">
+                                    <rect key="frame" x="137" y="3" width="206" height="80"/>
+                                    <clipView key="contentView" drawsBackground="NO" id="gVG-Of-Xsn">
+                                        <rect key="frame" x="0.0" y="0.0" width="191" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qvb-83-v5r">
+                                                <rect key="frame" x="0.0" y="0.0" width="191" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <size key="minSize" width="191" height="80"/>
+                                                <size key="maxSize" width="225" height="10000000"/>
+                                                <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            </textView>
+                                        </subviews>
+                                    </clipView>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="aId-ky-rcN"/>
+                                    </constraints>
+                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="yDE-Ta-9OL">
+                                        <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QfG-FZ-EY6">
+                                        <rect key="frame" x="191" y="0.0" width="15" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                </scrollView>
+                            </gridCell>
+                        </gridCells>
+                    </gridView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="UeQ-TI-rY2" secondAttribute="trailing" constant="20" symbolic="YES" id="Eeh-Lz-o6R"/>
+                    <constraint firstItem="Ny0-6m-4CB" firstAttribute="top" secondItem="UeQ-TI-rY2" secondAttribute="bottom" constant="20" id="GZU-VO-79H"/>
+                    <constraint firstItem="UeQ-TI-rY2" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="Kz7-UG-79C"/>
+                    <constraint firstAttribute="trailing" secondItem="Ny0-6m-4CB" secondAttribute="trailing" constant="20" symbolic="YES" id="Tu1-pe-135"/>
+                    <constraint firstAttribute="bottom" secondItem="Ny0-6m-4CB" secondAttribute="bottom" constant="20" symbolic="YES" id="bPN-S5-jQK"/>
+                    <constraint firstItem="UeQ-TI-rY2" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="klr-Fp-HlB"/>
+                    <constraint firstItem="M2X-Ki-Qeu" firstAttribute="centerY" secondItem="Ny0-6m-4CB" secondAttribute="centerY" id="pZl-le-TrT"/>
+                    <constraint firstItem="Ny0-6m-4CB" firstAttribute="leading" secondItem="M2X-Ki-Qeu" secondAttribute="trailing" constant="12" symbolic="YES" id="paO-R0-yVA"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="84" y="93.5"/>
+        </window>
+    </objects>
+</document>
