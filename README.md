@@ -3,8 +3,12 @@
 # OhMyPullRequests
 🚀 Access my pull requests from menu bar.
 
-<img src="screenshot.png" width="600" height="332" alt="screenshot" />
+It lists pull requests that either:
 
+1. Someone requests you to review the pull request.
+2. Your pull request that doesn't have a reviewer assigned or the reviewer has approved it.
+
+<img src="screenshot.png" width="600" height="332" alt="screenshot" />
 
 ## Usage
 
