@@ -8,7 +8,7 @@
 
 ## Usage
 
-1. Download the app from the [release page](https://github.com/luin/OhMyPullRequests/releases) or build it yourself.
+1. Download the app from the [release page](https://github.com/luin/OhMyPullRequests/releases) (Right-click the downloaded file and click "Open") or build it yourself.
 2. Click the icon on the menu bar.
 3. Click "Login..." on the dropdown menu.
 4. Input your [GitHub personal access token](https://github.com/settings/tokens/new). Make sure the token has the "repo" scope.
