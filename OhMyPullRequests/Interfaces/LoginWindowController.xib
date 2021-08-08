@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="LoginWindowController" customModule="OhMyPullRequests" customModuleProvider="target">
             <connections>
                 <outlet property="additionalLinksTextView" destination="qvb-83-v5r" id="LMO-PT-mLC"/>
+                <outlet property="launchAtLoginButton" destination="N55-2v-oko" id="2wy-OS-f1w"/>
                 <outlet property="okButton" destination="Ny0-6m-4CB" id="fW8-NU-nVh"/>
                 <outlet property="repoTextField" destination="4Be-Pm-KIw" id="DKY-Fa-cq5"/>
                 <outlet property="tokenTextField" destination="dE6-ME-YVx" id="Xok-jh-tID"/>
@@ -20,8 +21,8 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="376" height="207"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
-            <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="383" height="263"/>
+            <view key="contentView" misplaced="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="383" height="307"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ny0-6m-4CB">
@@ -51,12 +52,14 @@ Gw
                         </connections>
                     </button>
                     <gridView verticalHuggingPriority="249" xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-TI-rY2">
-                        <rect key="frame" x="20" y="60" width="343" height="183"/>
+                        <rect key="frame" x="20" y="60" width="343" height="238"/>
                         <rows>
                             <gridRow height="26" id="LrL-Sx-MFI"/>
                             <gridRow yPlacement="top" height="27" id="Zk7-oP-g2R"/>
                             <gridRow yPlacement="top" height="26" id="6iz-Z5-eWb"/>
                             <gridRow id="xBC-T9-ij1"/>
+                            <gridRow yPlacement="top" height="27" id="3i4-hB-Yep"/>
+                            <gridRow id="Rcn-2L-FIs"/>
                         </rows>
                         <columns>
                             <gridColumn xPlacement="trailing" width="131" id="a3s-xt-HT5"/>
@@ -65,7 +68,7 @@ Gw
                         <gridCells>
                             <gridCell row="LrL-Sx-MFI" column="a3s-xt-HT5" id="LEv-QO-tqD">
                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JY9-BG-LyH">
-                                    <rect key="frame" x="33" y="162" width="100" height="16"/>
+                                    <rect key="frame" x="33" y="217" width="100" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Personal Token:" id="meZ-RA-cJV">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +78,7 @@ Gw
                             </gridCell>
                             <gridCell row="LrL-Sx-MFI" column="DYn-NI-PVU" id="L9b-f3-d2h">
                                 <secureTextField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dE6-ME-YVx">
-                                    <rect key="frame" x="137" y="160" width="200" height="21"/>
+                                    <rect key="frame" x="137" y="215" width="200" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="aXn-D6-oB3"/>
                                     </constraints>
@@ -92,7 +95,7 @@ Gw
                             <gridCell row="Zk7-oP-g2R" column="a3s-xt-HT5" id="pUo-c9-4w7"/>
                             <gridCell row="Zk7-oP-g2R" column="DYn-NI-PVU" id="m9s-Ky-0Nf">
                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FrA-YC-wFh">
-                                    <rect key="frame" x="135" y="138" width="116" height="13"/>
+                                    <rect key="frame" x="135" y="193" width="116" height="13"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Requires &quot;repo&quot; scope." id="n6l-dn-rvz">
                                         <font key="font" metaFont="system" size="10"/>
                                         <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -102,7 +105,7 @@ Gw
                             </gridCell>
                             <gridCell row="6iz-Z5-eWb" column="a3s-xt-HT5" id="OHI-nD-XjJ">
                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q41-yq-AoZ">
-                                    <rect key="frame" x="50" y="102" width="83" height="16"/>
+                                    <rect key="frame" x="50" y="157" width="83" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Repositories:" id="Uyn-cI-hXQ">
                                         <font key="font" usesAppearanceFont="YES"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -112,7 +115,7 @@ Gw
                             </gridCell>
                             <gridCell row="6iz-Z5-eWb" column="DYn-NI-PVU" id="bfW-t4-yLj">
                                 <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Be-Pm-KIw">
-                                    <rect key="frame" x="137" y="97" width="200" height="21"/>
+                                    <rect key="frame" x="137" y="152" width="200" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="7xT-K4-UVV"/>
                                     </constraints>
@@ -125,7 +128,7 @@ Gw
                             </gridCell>
                             <gridCell row="xBC-T9-ij1" column="a3s-xt-HT5" yPlacement="top" id="f0W-kf-5PE">
                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QVU-NC-edb">
-                                    <rect key="frame" x="29" y="70" width="104" height="16"/>
+                                    <rect key="frame" x="29" y="125" width="104" height="16"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Additional Links:" id="UUz-hk-SjU">
                                         <font key="font" usesAppearanceFont="YES"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -135,7 +138,7 @@ Gw
                             </gridCell>
                             <gridCell row="xBC-T9-ij1" column="DYn-NI-PVU" id="4AB-h3-7IC">
                                 <scrollView key="contentView" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fuo-gA-sbm">
-                                    <rect key="frame" x="137" y="3" width="206" height="80"/>
+                                    <rect key="frame" x="137" y="61" width="206" height="80"/>
                                     <clipView key="contentView" drawsBackground="NO" id="gVG-Of-Xsn">
                                         <rect key="frame" x="0.0" y="0.0" width="191" height="80"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,6 +166,27 @@ Gw
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                 </scrollView>
+                            </gridCell>
+                            <gridCell row="3i4-hB-Yep" column="a3s-xt-HT5" id="5gi-gf-6EB"/>
+                            <gridCell row="3i4-hB-Yep" column="DYn-NI-PVU" id="j0b-bP-njR">
+                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dve-Ue-aC9">
+                                    <rect key="frame" x="135" y="41" width="97" height="14"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Format: Title|Link" id="E4s-KC-3qe">
+                                        <font key="font" size="12" name="HelveticaNeue"/>
+                                        <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="Rcn-2L-FIs" column="a3s-xt-HT5" id="hqZ-jX-pee"/>
+                            <gridCell row="Rcn-2L-FIs" column="DYn-NI-PVU" id="qAY-IG-b6t">
+                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N55-2v-oko">
+                                    <rect key="frame" x="135" y="2" width="208" height="18"/>
+                                    <buttonCell key="cell" type="check" title="Launch at login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IeO-kn-EzC">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                </button>
                             </gridCell>
                         </gridCells>
                     </gridView>

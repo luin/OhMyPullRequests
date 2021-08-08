@@ -7,6 +7,7 @@
 
 import Cocoa
 import SwiftyUserDefaults
+import LaunchAtLogin
 
 protocol LoginWindowControllerDelegate: NSObject {
     func settingUpdated(_ sender: Any) -> Void
@@ -17,6 +18,7 @@ class LoginWindowController: NSWindowController {
     @IBOutlet private var repoTextField: NSTextField!
     @IBOutlet private var okButton: NSButton!
     @IBOutlet var additionalLinksTextView: NSTextView!
+    @IBOutlet var launchAtLoginButton: NSButton!
     
     weak var delegate: LoginWindowControllerDelegate?
     
@@ -29,6 +31,7 @@ class LoginWindowController: NSWindowController {
         tokenTextField.stringValue = TokenManager.shared.get() ?? ""
         repoTextField.stringValue = Defaults.repository
         additionalLinksTextView.string = Defaults.links
+        launchAtLoginButton.state = LaunchAtLogin.isEnabled ? .on : .off
     }
     
     @IBAction private func cancelButtonClick(_ sender: Any) {
@@ -40,6 +43,7 @@ class LoginWindowController: NSWindowController {
         Defaults.links = additionalLinksTextView.string
         TokenManager.shared.set(tokenTextField.stringValue)
         delegate?.settingUpdated(sender)
+        LaunchAtLogin.isEnabled = launchAtLoginButton.state == .on
         close()
     }
 }

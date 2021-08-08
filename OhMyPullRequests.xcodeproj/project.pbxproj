@@ -16,6 +16,7 @@
 		2F4A755426BEAFFF00A8F7ED /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4A755326BEAFFF00A8F7ED /* SwiftyUserDefaults */; };
 		2F4A755926BED51F00A8F7ED /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A755826BED51F00A8F7ED /* DefaultsKeys.swift */; };
 		2F4A755B26BEDCD800A8F7ED /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A755A26BEDCD800A8F7ED /* DropdownMenu.swift */; };
+		2F4A756026BF871B00A8F7ED /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4A755F26BF871B00A8F7ED /* LaunchAtLogin */; };
 		2F52139D26BEA133002DC107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52139C26BEA133002DC107 /* AppDelegate.swift */; };
 		2F52139F26BEA135002DC107 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F52139E26BEA135002DC107 /* Assets.xcassets */; };
 		2F5213A226BEA135002DC107 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5213A026BEA135002DC107 /* MainMenu.xib */; };
@@ -43,6 +44,7 @@
 			files = (
 				2F4A755126BEAD1000A8F7ED /* OctoKit in Frameworks */,
 				2F4A755426BEAFFF00A8F7ED /* SwiftyUserDefaults in Frameworks */,
+				2F4A756026BF871B00A8F7ED /* LaunchAtLogin in Frameworks */,
 				2F4A754626BEA5B200A8F7ED /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +121,7 @@
 				2F52139526BEA133002DC107 /* Sources */,
 				2F52139626BEA133002DC107 /* Frameworks */,
 				2F52139726BEA133002DC107 /* Resources */,
+				2F4A756126BF873200A8F7ED /* Copy “Launch at Login Helper” */,
 			);
 			buildRules = (
 			);
@@ -129,6 +132,7 @@
 				2F4A754526BEA5B200A8F7ED /* KeychainSwift */,
 				2F4A755026BEAD1000A8F7ED /* OctoKit */,
 				2F4A755326BEAFFF00A8F7ED /* SwiftyUserDefaults */,
+				2F4A755F26BF871B00A8F7ED /* LaunchAtLogin */,
 			);
 			productName = OhMyPullRequests;
 			productReference = 2F52139926BEA133002DC107 /* OhMyPullRequests.app */;
@@ -161,6 +165,7 @@
 				2F4A754426BEA5B200A8F7ED /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				2F4A754F26BEAD1000A8F7ED /* XCRemoteSwiftPackageReference "octokit" */,
 				2F4A755226BEAFFF00A8F7ED /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
+				2F4A755E26BF871B00A8F7ED /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = 2F52139A26BEA133002DC107 /* Products */;
 			projectDirPath = "";
@@ -183,6 +188,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F4A756126BF873200A8F7ED /* Copy “Launch at Login Helper” */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy “Launch at Login Helper”";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F52139526BEA133002DC107 /* Sources */ = {
@@ -417,6 +443,14 @@
 				minimumVersion = 5.3.0;
 			};
 		};
+		2F4A755E26BF871B00A8F7ED /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -434,6 +468,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F4A755226BEAFFF00A8F7ED /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
 			productName = SwiftyUserDefaults;
+		};
+		2F4A755F26BF871B00A8F7ED /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F4A755E26BF871B00A8F7ED /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
