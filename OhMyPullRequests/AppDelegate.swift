@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.imageScaling = .scaleProportionallyUpOrDown
         }
         menu.actionDelegate = self
+        menu.set(pullRequests: [])
         statusItem.menu = menu
         
         updatePullRequestManager()
