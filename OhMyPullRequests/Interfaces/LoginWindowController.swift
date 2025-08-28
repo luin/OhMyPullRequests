@@ -10,46 +10,45 @@ import SwiftyUserDefaults
 import LaunchAtLogin
 
 protocol LoginWindowControllerDelegate: NSObject {
-    func settingUpdated(_ sender: Any) -> Void
+  func settingUpdated(_ sender: Any) -> Void
 }
 
 class LoginWindowController: NSWindowController {
-    @IBOutlet private var tokenTextField: NSSecureTextField!
-    @IBOutlet private var repoTextField: NSTextField!
-    @IBOutlet private var okButton: NSButton!
-    @IBOutlet var additionalLinksTextView: NSTextView!
-    @IBOutlet var launchAtLoginButton: NSButton!
+  @IBOutlet private var tokenTextField: NSSecureTextField!
+  @IBOutlet private var okButton: NSButton!
+  @IBOutlet var settingsTextView: NSTextView!
+  @IBOutlet var launchAtLoginButton: NSButton!
+  
+  weak var delegate: LoginWindowControllerDelegate?
+  
+  override func windowDidLoad() {
+    super.windowDidLoad()
     
-    weak var delegate: LoginWindowControllerDelegate?
+    tokenTextField.delegate = self
     
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        
-        tokenTextField.delegate = self
-        repoTextField.delegate = self
-        
-        tokenTextField.stringValue = TokenManager.shared.get() ?? ""
-        repoTextField.stringValue = Defaults.repository
-        additionalLinksTextView.string = Defaults.links
-        launchAtLoginButton.state = LaunchAtLogin.isEnabled ? .on : .off
-    }
+    tokenTextField.stringValue = TokenManager.shared.get() ?? ""
+    settingsTextView.string = Defaults.settings
+    launchAtLoginButton.state = LaunchAtLogin.isEnabled ? .on : .off
     
-    @IBAction private func cancelButtonClick(_ sender: Any) {
-        close()
-    }
-    
-    @IBAction private func OKButtonClick(_ sender: Any) {
-        Defaults.repository = repoTextField.stringValue
-        Defaults.links = additionalLinksTextView.string
-        TokenManager.shared.set(tokenTextField.stringValue)
-        delegate?.settingUpdated(sender)
-        LaunchAtLogin.isEnabled = launchAtLoginButton.state == .on
-        close()
-    }
+    settingsTextView.font = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    settingsTextView.isAutomaticQuoteSubstitutionEnabled = false
+  }
+  
+  @IBAction private func cancelButtonClick(_ sender: Any) {
+    close()
+  }
+  
+  @IBAction private func OKButtonClick(_ sender: Any) {
+    Defaults.settings = settingsTextView.string
+    TokenManager.shared.set(tokenTextField.stringValue)
+    delegate?.settingUpdated(sender)
+    LaunchAtLogin.isEnabled = launchAtLoginButton.state == .on
+    close()
+  }
 }
 
 extension LoginWindowController: NSTextFieldDelegate {
-    func controlTextDidChange(_ obj: Notification) {
-        okButton.isEnabled = !tokenTextField.stringValue.isEmpty && repoTextField.stringValue.contains("/")
-    }
+  func controlTextDidChange(_ obj: Notification) {
+    okButton.isEnabled = !tokenTextField.stringValue.isEmpty
+  }
 }

@@ -9,6 +9,5 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    var repository: DefaultsKey<String> { .init("repository", defaultValue: "") }
-    var links: DefaultsKey<String> { .init("links", defaultValue: "Homepage|https://github.com/luin/OhMyPullRequests") }
+  var settings: DefaultsKey<String> { .init("settings", defaultValue: "{\n  \"repos\": [],\n  \"quickLinks\": [{\n    \"title\": \"Oh My Pull Requests\",\n    \"url\": \"https://github.com/luin/ohmypullrequests\"\n  }]\n}") }
 }

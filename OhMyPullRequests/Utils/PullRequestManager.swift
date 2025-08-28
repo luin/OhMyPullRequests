@@ -6,119 +6,218 @@
 //
 
 import Foundation
-import OctoKit
 import RequestKit
+import AsyncHTTPClient
+import NIO
+import SwiftyJSON
+
+enum GitHubItemReason {
+  case toRequestReviewers
+  case toAddressFeddbacks
+  case toReview
+}
+
+struct GitHubItem {
+  var title: String
+  var repo: String
+  var url: String
+  var reason: GitHubItemReason
+}
+
+let MY_PRS = """
+  query {
+    search(first: 100, type: ISSUE, query: "is:pr is:open author:@me draft:false") {
+      edges {
+        node {
+          __typename
+          ... on PullRequest {
+            title
+            url
+            repository {
+              nameWithOwner
+            }
+            latestReviews(first: 10) {
+              edges {
+                node {
+                  id
+                  state
+                  author {
+                    login
+                  }
+                }
+              }
+            }
+            reviewRequests(first: 1) {
+              __typename
+              nodes {
+                id
+                requestedReviewer {
+                  __typename
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+
+let OTHER_PRS = """
+  query {
+    search(first: 100, type: ISSUE, query: "is:pr is:open review-requested:@me draft:false") {
+      edges {
+        node {
+          __typename
+          ... on PullRequest {
+            title
+            url
+            repository {
+              nameWithOwner
+            }
+            latestReviews(first: 10) {
+              edges {
+                node {
+                  id
+                  state
+                  author {
+                    login
+                  }
+                }
+              }
+            }
+            reviewRequests(first: 1) {
+              __typename
+              nodes {
+                id
+                requestedReviewer {
+                  __typename
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  """
+
 
 protocol PullRequestManagerDelegate: NSObject {
-    func pullRequestsFetched(_ prs: [PullRequestManager.InterestedPullRequest]) -> Void
+  func pullRequestsFetched(_ prs: [GitHubItem]) -> Void
 }
 
 class PullRequestManager {
-    struct Repo {
-        var owner: String
-        var repository: String
+  struct Repo {
+    var owner: String
+    var repository: String
+    
+    static func from(string: String) -> Self? {
+      let parts = string.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "/")
+      if parts.count != 2 {
+        return nil
+      }
+      return Repo(owner: String(parts[0]), repository: String(parts[1]))
+    }
+  }
+  
+  let settings: Settings
+  var timer: Timer?
+  let token: String
+  var myLogin: String?
+  weak var delegate: PullRequestManagerDelegate?
+  
+  init(token: String, settings: Settings) {
+    self.token = token
+    self.settings = settings
+    self.timer?.fire()
+  }
+  
+  deinit {
+    timer?.invalidate()
+  }
+  
+  
+  @MainActor
+  private func searchPullRequests(query: String) async -> [JSON]? {
+    var request = HTTPClientRequest(url: "https://api.github.com/graphql")
+    request.method = .POST
+    request.headers.add(name: "User-Agent", value: "OhMyPullRequest Client 1.0")
+    request.headers.add(name: "Authorization", value: "bearer \(token)")
+    let bodyJSON = JSON(["query": query] as [String: Any?])
+    request.body = .bytes(ByteBuffer(string: bodyJSON.rawString()!))
+    
+    if let requestBody = bodyJSON.rawString() {
+      request.body = .bytes(ByteBuffer(string: requestBody))
+      
+      if let response = try? await HTTPClient.shared.execute(request, timeout: .seconds(30)),
+         var byteBuffer = try? await response.body.collect(upTo: 10 * 1024 * 1024),
+         let data = byteBuffer.readData(length: byteBuffer.readableBytes),
+         let json = try? JSON(data: data),
+         let edges = json["data"]["search"]["edges"].array {
+        return edges.map { $0["node"] }
+      }
+    }
+      
+    return nil
+  }
+  
+  private func toGitHubItem(json: JSON, reason: GitHubItemReason) -> GitHubItem {
+    GitHubItem(title: json["title"].stringValue, repo: json["repository"]["nameWithOwner"].stringValue, url: json["url"].stringValue, reason: reason)
+  }
+  
+  @MainActor
+  private func reloadData() async {
+    var prs: [GitHubItem] = []
+    
+    async let myPRItems = searchPullRequests(query: MY_PRS)
+    async let otherPRItems = searchPullRequests(query: OTHER_PRS)
+    
+    let itemGroups = await [myPRItems, otherPRItems]
+    
+    if let items = itemGroups.first {
+      items?.forEach {
+        let hasNoReviewerRequested = $0["reviewRequests"].array?.count == 0
+        let hasReceivedReviews = $0["latestReviews"]["edges"].arrayValue.contains(where: {
+          let state = $0["node"]["state"].stringValue
+          return state == "COMMENTED" || state == "APPROVED" || state == "CHANGES_REQUESTED"
+        })
         
-        static func from(string: String) -> Self? {
-            let parts = string.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "/")
-            if parts.count != 2 {
-                return nil
-            }
-            return Repo(owner: String(parts[0]), repository: String(parts[1]))
+        if hasNoReviewerRequested {
+          prs.append(toGitHubItem(json: $0, reason: .toRequestReviewers))
+        } else if hasReceivedReviews {
+          prs.append(toGitHubItem(json: $0, reason: .toAddressFeddbacks))
         }
+      }
     }
     
-    struct InterestedPullRequest {
-        var data: PullRequest
-        var isMine: Bool
-    }
-    
-    let client: Octokit
-    let repo: String
-    var timer: Timer?
-    var myLogin: String?
-    weak var delegate: PullRequestManagerDelegate?
-    
-    init(token: String, repo: String) {
-        let config = TokenConfiguration(token)
-        client = Octokit(config)
-        self.repo = repo
-        
-        client.me {
-            if case let .success(user) = $0 {
-                self.myLogin = user.login
-                self.timer?.fire()
-            }
+    if let items = itemGroups.last {
+      items?.forEach {
+        if $0["title"].string != nil {
+          prs.append(toGitHubItem(json: $0, reason: .toReview))
         }
+      }
     }
     
-    deinit {
-        timer?.invalidate()
+    if !settings.repos.isEmpty {
+      prs = prs.filter {
+        let repo = $0.repo
+        return settings.repos.contains(where: { repo.hasPrefix($0) })
+      }
     }
     
-    private func needMyReview(_ pr: PullRequest) -> Bool {
-        (pr.requestedReviewers ?? []).contains { $0.login == myLogin }
+    self.delegate?.pullRequestsFetched(prs)
+  }
+  
+  func start() {
+    timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) { [weak self] _ in
+      Task {
+        _ = await self?.reloadData()
+      }
     }
-    
-    private func isIdle(_ pr: PullRequest) -> Bool {
-        pr.user?.login == myLogin && (pr.requestedReviewers ?? []).isEmpty
-    }
-    
-    private func reloadData() {
-        pullRequests { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            switch $0 {
-            case .success(let pullRequests):
-                self.delegate?.pullRequestsFetched(pullRequests)
-            case .failure(let error):
-                debugPrint(error)
-            }
-        }
-    }
-    
-    private func pullRequests(completion: @escaping (Response<[InterestedPullRequest]>) -> Void) {
-        var error: Error?
-        let dispatchGroup = DispatchGroup()
-        var interested: [InterestedPullRequest] = []
-        let repos = repo.split(separator: ",").compactMap { Repo.from(string: String($0)) }
-        repos.forEach {
-            dispatchGroup.enter()
-            
-            client.pullRequests(owner: String($0.owner), repository: String($0.repository), state: .open) { response in
-                DispatchQueue.main.async {
-                    defer {
-                        dispatchGroup.leave()
-                    }
-                    switch response {
-                    case .success(let prs):
-                        prs.filter(self.needMyReview(_:)).forEach { interested.append(InterestedPullRequest(data: $0, isMine: false)) }
-                        prs.filter(self.isIdle(_:)).forEach { interested.append(InterestedPullRequest(data: $0, isMine: true)) }
-                    case .failure(let reason):
-                        error = reason
-                        break
-                    }
-                }
-            }
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            if let error = error {
-                completion(Response.failure(error))
-            } else {
-                completion(Response.success(interested))
-            }
-        }
-    }
-    
-    func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) { [weak self] _ in
-            self?.reloadData()
-        }
-    }
-    
-    func fire() {
-        timer?.fire()
-    }
+  }
+  
+  func fire() {
+    timer?.fire()
+  }
 }

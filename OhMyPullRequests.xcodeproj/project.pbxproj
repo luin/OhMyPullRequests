@@ -3,16 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1F14E82DDED2D0006F1236 /* RequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1F14E72DDED2D0006F1236 /* RequestKit */; };
+		2F1F14EB2DDED2E1006F1236 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1F14EA2DDED2E1006F1236 /* SwiftFormat */; };
+		2F20B8882E5F0ABA00FCFFAC /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 2F20B8872E5F0ABA00FCFFAC /* SwiftyJSON */; };
 		2F4A754626BEA5B200A8F7ED /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4A754526BEA5B200A8F7ED /* KeychainSwift */; };
 		2F4A754926BEA65800A8F7ED /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A754726BEA65800A8F7ED /* LoginWindowController.swift */; };
 		2F4A754A26BEA65800A8F7ED /* LoginWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4A754826BEA65800A8F7ED /* LoginWindowController.xib */; };
 		2F4A754C26BEA9A900A8F7ED /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A754B26BEA9A900A8F7ED /* TokenManager.swift */; };
 		2F4A754E26BEACD800A8F7ED /* PullRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A754D26BEACD800A8F7ED /* PullRequestManager.swift */; };
-		2F4A755126BEAD1000A8F7ED /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4A755026BEAD1000A8F7ED /* OctoKit */; };
 		2F4A755426BEAFFF00A8F7ED /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4A755326BEAFFF00A8F7ED /* SwiftyUserDefaults */; };
 		2F4A755926BED51F00A8F7ED /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A755826BED51F00A8F7ED /* DefaultsKeys.swift */; };
 		2F4A755B26BEDCD800A8F7ED /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A755A26BEDCD800A8F7ED /* DropdownMenu.swift */; };
@@ -20,6 +22,9 @@
 		2F52139D26BEA133002DC107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52139C26BEA133002DC107 /* AppDelegate.swift */; };
 		2F52139F26BEA135002DC107 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F52139E26BEA135002DC107 /* Assets.xcassets */; };
 		2F5213A226BEA135002DC107 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F5213A026BEA135002DC107 /* MainMenu.xib */; };
+		2F7150642E5F40390063D6AD /* AsyncHTTPClient in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7150632E5F40390063D6AD /* AsyncHTTPClient */; };
+		2F7150672E5F41430063D6AD /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7150662E5F41430063D6AD /* NIO */; };
+		2F7150692E5F41430063D6AD /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7150682E5F41430063D6AD /* NIOCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,10 +47,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F4A755126BEAD1000A8F7ED /* OctoKit in Frameworks */,
+				2F20B8882E5F0ABA00FCFFAC /* SwiftyJSON in Frameworks */,
+				2F7150672E5F41430063D6AD /* NIO in Frameworks */,
 				2F4A755426BEAFFF00A8F7ED /* SwiftyUserDefaults in Frameworks */,
+				2F7150692E5F41430063D6AD /* NIOCore in Frameworks */,
 				2F4A756026BF871B00A8F7ED /* LaunchAtLogin in Frameworks */,
+				2F7150642E5F40390063D6AD /* AsyncHTTPClient in Frameworks */,
 				2F4A754626BEA5B200A8F7ED /* KeychainSwift in Frameworks */,
+				2F1F14EB2DDED2E1006F1236 /* SwiftFormat in Frameworks */,
+				2F1F14E82DDED2D0006F1236 /* RequestKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,9 +140,14 @@
 			name = OhMyPullRequests;
 			packageProductDependencies = (
 				2F4A754526BEA5B200A8F7ED /* KeychainSwift */,
-				2F4A755026BEAD1000A8F7ED /* OctoKit */,
 				2F4A755326BEAFFF00A8F7ED /* SwiftyUserDefaults */,
 				2F4A755F26BF871B00A8F7ED /* LaunchAtLogin */,
+				2F1F14E72DDED2D0006F1236 /* RequestKit */,
+				2F1F14EA2DDED2E1006F1236 /* SwiftFormat */,
+				2F20B8872E5F0ABA00FCFFAC /* SwiftyJSON */,
+				2F7150632E5F40390063D6AD /* AsyncHTTPClient */,
+				2F7150662E5F41430063D6AD /* NIO */,
+				2F7150682E5F41430063D6AD /* NIOCore */,
 			);
 			productName = OhMyPullRequests;
 			productReference = 2F52139926BEA133002DC107 /* OhMyPullRequests.app */;
@@ -163,9 +178,13 @@
 			mainGroup = 2F52139026BEA133002DC107;
 			packageReferences = (
 				2F4A754426BEA5B200A8F7ED /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				2F4A754F26BEAD1000A8F7ED /* XCRemoteSwiftPackageReference "octokit" */,
 				2F4A755226BEAFFF00A8F7ED /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				2F4A755E26BF871B00A8F7ED /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				2F1F14E62DDED2D0006F1236 /* XCRemoteSwiftPackageReference "RequestKit" */,
+				2F1F14E92DDED2E1006F1236 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
+				2F20B8862E5F0ABA00FCFFAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				2F7150622E5F40390063D6AD /* XCRemoteSwiftPackageReference "async-http-client" */,
+				2F7150652E5F41430063D6AD /* XCRemoteSwiftPackageReference "swift-nio" */,
 			);
 			productRefGroup = 2F52139A26BEA133002DC107 /* Products */;
 			projectDirPath = "";
@@ -289,7 +308,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -344,7 +363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -369,7 +388,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = li.zihua.OhMyPullRequests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -393,7 +412,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = li.zihua.OhMyPullRequests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,20 +444,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F1F14E62DDED2D0006F1236 /* XCRemoteSwiftPackageReference "RequestKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerdishbynature/RequestKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
+		2F1F14E92DDED2E1006F1236 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/SwiftFormat";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.56.1;
+			};
+		};
+		2F20B8862E5F0ABA00FCFFAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		2F4A754426BEA5B200A8F7ED /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 19.0.0;
-			};
-		};
-		2F4A754F26BEAD1000A8F7ED /* XCRemoteSwiftPackageReference "octokit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nerdishbynature/octokit.swift";
-			requirement = {
-				branch = master;
-				kind = branch;
 			};
 		};
 		2F4A755226BEAFFF00A8F7ED /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
@@ -457,18 +492,44 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		2F7150622E5F40390063D6AD /* XCRemoteSwiftPackageReference "async-http-client" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swift-server/async-http-client.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.26.1;
+			};
+		};
+		2F7150652E5F41430063D6AD /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.86.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F1F14E72DDED2D0006F1236 /* RequestKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F1F14E62DDED2D0006F1236 /* XCRemoteSwiftPackageReference "RequestKit" */;
+			productName = RequestKit;
+		};
+		2F1F14EA2DDED2E1006F1236 /* SwiftFormat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F1F14E92DDED2E1006F1236 /* XCRemoteSwiftPackageReference "SwiftFormat" */;
+			productName = SwiftFormat;
+		};
+		2F20B8872E5F0ABA00FCFFAC /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F20B8862E5F0ABA00FCFFAC /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		2F4A754526BEA5B200A8F7ED /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F4A754426BEA5B200A8F7ED /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
-		};
-		2F4A755026BEAD1000A8F7ED /* OctoKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F4A754F26BEAD1000A8F7ED /* XCRemoteSwiftPackageReference "octokit" */;
-			productName = OctoKit;
 		};
 		2F4A755326BEAFFF00A8F7ED /* SwiftyUserDefaults */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -479,6 +540,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F4A755E26BF871B00A8F7ED /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
 			productName = LaunchAtLogin;
+		};
+		2F7150632E5F40390063D6AD /* AsyncHTTPClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F7150622E5F40390063D6AD /* XCRemoteSwiftPackageReference "async-http-client" */;
+			productName = AsyncHTTPClient;
+		};
+		2F7150662E5F41430063D6AD /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F7150652E5F41430063D6AD /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		2F7150682E5F41430063D6AD /* NIOCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F7150652E5F41430063D6AD /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
