@@ -1,10 +1,3 @@
-//
-//  LoginWindowController.swift
-//  OhMyPullRequests
-//
-//  Created by Zihua Li on 2021/8/7.
-//
-
 import Cocoa
 import SwiftyUserDefaults
 import LaunchAtLogin

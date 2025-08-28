@@ -380,7 +380,7 @@
 				CODE_SIGN_ENTITLEMENTS = OhMyPullRequests/OhMyPullRequests.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 35DFNA47LC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = OhMyPullRequests/Info.plist;
@@ -389,7 +389,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = li.zihua.OhMyPullRequests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -404,7 +404,7 @@
 				CODE_SIGN_ENTITLEMENTS = OhMyPullRequests/OhMyPullRequests.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 35DFNA47LC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = OhMyPullRequests/Info.plist;
@@ -413,7 +413,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = li.zihua.OhMyPullRequests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

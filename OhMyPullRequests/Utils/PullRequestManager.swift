@@ -1,10 +1,3 @@
-//
-//  PullRequestManager.swift
-//  OhMyPullRequests
-//
-//  Created by Zihua Li on 2021/8/7.
-//
-
 import Foundation
 import RequestKit
 import AsyncHTTPClient
@@ -15,6 +8,7 @@ enum GitHubItemReason {
   case toRequestReviewers
   case toAddressFeddbacks
   case toReview
+  case toPublish
 }
 
 struct GitHubItem {
@@ -26,13 +20,14 @@ struct GitHubItem {
 
 let MY_PRS = """
   query {
-    search(first: 100, type: ISSUE, query: "is:pr is:open author:@me draft:false") {
+    search(first: 100, type: ISSUE, query: "is:pr is:open author:@me") {
       edges {
         node {
           __typename
           ... on PullRequest {
             title
             url
+            isDraft
             repository {
               nameWithOwner
             }
@@ -72,6 +67,7 @@ let OTHER_PRS = """
           ... on PullRequest {
             title
             url
+            isDraft
             repository {
               nameWithOwner
             }
@@ -108,28 +104,15 @@ protocol PullRequestManagerDelegate: NSObject {
 }
 
 class PullRequestManager {
-  struct Repo {
-    var owner: String
-    var repository: String
-    
-    static func from(string: String) -> Self? {
-      let parts = string.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "/")
-      if parts.count != 2 {
-        return nil
-      }
-      return Repo(owner: String(parts[0]), repository: String(parts[1]))
-    }
-  }
-  
   let settings: Settings
   var timer: Timer?
   let token: String
-  var myLogin: String?
   weak var delegate: PullRequestManagerDelegate?
   
   init(token: String, settings: Settings) {
     self.token = token
     self.settings = settings
+    
     self.timer?.fire()
   }
   
@@ -182,11 +165,14 @@ class PullRequestManager {
           let state = $0["node"]["state"].stringValue
           return state == "COMMENTED" || state == "APPROVED" || state == "CHANGES_REQUESTED"
         })
+        let isDraft = $0["isDraft"].boolValue
         
         if hasNoReviewerRequested {
           prs.append(toGitHubItem(json: $0, reason: .toRequestReviewers))
         } else if hasReceivedReviews {
           prs.append(toGitHubItem(json: $0, reason: .toAddressFeddbacks))
+        } else if isDraft && !hasNoReviewerRequested {
+          prs.append(toGitHubItem(json: $0, reason: .toPublish))
         }
       }
     }

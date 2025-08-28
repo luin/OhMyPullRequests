@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  OhMyPullRequests
-//
-//  Created by Zihua Li on 2021/8/7.
-//
-
 import Cocoa
 import KeychainSwift
 import SwiftyUserDefaults
@@ -37,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     menu.actionDelegate = self
     menu.set(pullRequests: [])
     statusItem.menu = menu
-        
+    
     updatePullRequestManager()
   }
   
@@ -58,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return nil
     })
     menu.quickLinks = settings.quickLinks
-
+    
     if let token = TokenManager.shared.get() {
       pullRequestManager = PullRequestManager(token: token, settings: settings)
       pullRequestManager?.delegate = self

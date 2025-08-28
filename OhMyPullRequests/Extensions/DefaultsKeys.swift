@@ -1,10 +1,3 @@
-//
-//  DefaultsKeys.swift
-//  OhMyPullRequests
-//
-//  Created by Zihua Li on 2021/8/7.
-//
-
 import Foundation
 import SwiftyUserDefaults
 

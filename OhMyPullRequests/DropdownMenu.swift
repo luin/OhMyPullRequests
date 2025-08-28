@@ -1,10 +1,3 @@
-//
-//  MenuFactory.swift
-//  OhMyPullRequests
-//
-//  Created by Zihua Li on 2021/8/7.
-//
-
 import Cocoa
 import SwiftyUserDefaults
 
@@ -33,6 +26,7 @@ class DropdownMenu: NSMenu {
   func set(pullRequests: [GitHubItem]) {
     removeAllItems()
     
+    addMenuItemGroup(pullRequests.filter { $0.reason == .toPublish }, title: "To Publish")
     addMenuItemGroup(pullRequests.filter { $0.reason == .toAddressFeddbacks }, title: "To Address Feedbacks")
     addMenuItemGroup(pullRequests.filter { $0.reason == .toRequestReviewers }, title: "To Request Reviewers")
     addMenuItemGroup(pullRequests.filter { $0.reason == .toReview }, title: "To Review")
