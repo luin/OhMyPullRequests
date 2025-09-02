@@ -9,6 +9,7 @@ enum GitHubItemReason {
   case toAddressFeddbacks
   case toReview
   case toPublish
+  case toMerge
 }
 
 struct GitHubItem {
@@ -160,17 +161,22 @@ class PullRequestManager {
     
     if let items = itemGroups.first {
       items?.forEach {
-        let hasNoReviewerRequested = $0["reviewRequests"].array?.count == 0
+        let hasNoReviewerRequested = $0["reviewRequests"]["nodes"].array?.count == 0
         let hasReceivedReviews = $0["latestReviews"]["edges"].arrayValue.contains(where: {
           let state = $0["node"]["state"].stringValue
           return state == "COMMENTED" || state == "APPROVED" || state == "CHANGES_REQUESTED"
         })
+        let hasBeenApproved = $0["latestReviews"]["edges"].arrayValue.contains(where: {
+          let state = $0["node"]["state"].stringValue
+          return state == "APPROVED"
+        })
+
         let isDraft = $0["isDraft"].boolValue
         
-        if hasNoReviewerRequested {
+        if hasNoReviewerRequested && !isDraft && !hasReceivedReviews {
           prs.append(toGitHubItem(json: $0, reason: .toRequestReviewers))
-        } else if hasReceivedReviews {
-          prs.append(toGitHubItem(json: $0, reason: .toAddressFeddbacks))
+        } else if hasReceivedReviews && !isDraft {
+          prs.append(toGitHubItem(json: $0, reason: hasBeenApproved ? .toMerge : .toAddressFeddbacks))
         } else if isDraft && !hasNoReviewerRequested {
           prs.append(toGitHubItem(json: $0, reason: .toPublish))
         }
